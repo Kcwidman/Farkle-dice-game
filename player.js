@@ -2,12 +2,13 @@ class player
 {
     constructor(name)
     {
-        this.totalScore = -500
+        this.totalScore = 9900
         this.turnScore = 0
         this.name = name
         this.activeDice = new Array(6)
         this.savedDice = []
         this.turnCount = 0
+        this.prevTurnScore = 0
         this.farkle = false
 
         for(let i=0;i<6;i++)
@@ -80,6 +81,7 @@ class player
         console.log("turn score is ",this.turnScore," at endTurn", this.farkle)
         if(!this.farkle) this.totalScore += this.turnScore
         this.turnCount++
+        this.prevTurnScore = this.turnScore
         this.turnScore = 0
         this.farkle = false
     }

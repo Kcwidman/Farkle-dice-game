@@ -5,6 +5,7 @@ class Game
         this.playerCount = playerNames.length
         this.players = new Array(this.playerCount)
         this.currentPlayerID = 0
+        this.gameOver = false
         for(let i=0;i<this.playerCount;i++)
         {
             let player_i = new player(playerNames[i])
@@ -14,6 +15,10 @@ class Game
 
     nextPlayer()
     {
+        if(this.currentPlayer().totalScore >= 10000)
+        {
+            this.gameOver = true
+        }
         this.currentPlayer().endTurn()
         this.currentPlayerID = (this.currentPlayerID + 1) % this.playerCount
     }
@@ -34,6 +39,7 @@ class Game
         for(let i=0; i<this.playerCount;i++)
         {
             let text = this.players[i].name + ": " + this.players[i].totalScore
+            text+=" (+ " + this.players[i].prevTurnScore + ")"
             if(this.currentPlayer().name == this.players[i].name)
             {
                 text+=" *"
@@ -61,27 +67,42 @@ class Game
                 img.onload = () => ctx.drawImage(img, 75 + 50*i, 350, 50, 50)
             }
         })
-
+//WINNER CHECK
+        for(let i=0; i < this.playerCount; i++)
+        {
+            if(this.players[i].totalScore >= 10000)
+            {
+                this.gameOver = true
+                ctx.font = "45px Arial"
+                ctx.fillText(this.players[i].name + " WINS!", 130, 400)
+            }
+        }
     }
 
     buttonListener()
     {
         document.querySelector("#rollButton").addEventListener("click", () => {
-            this.currentPlayer().tally(this.currentPlayer().diceToNums())
-            if(this.currentPlayer().farkle)
+            if(!this.gameOver)
             {
-                this.nextPlayer()
+                this.currentPlayer().tally(this.currentPlayer().diceToNums())
+                if(this.currentPlayer().farkle)
+                {
+                    this.nextPlayer()
+                }
+                else
+                {
+                    this.currentPlayer().playerRoll();
+                }
+                this.splat();
             }
-            else
-            {
-                this.currentPlayer().playerRoll();
-            }
-            this.splat();
         })
 
         document.querySelector("#endTurnButton").addEventListener("click", () => {
-            this.nextPlayer();
-            this.splat();
+            if(!this.gameOver)
+            {
+                this.nextPlayer();
+                this.splat();
+            }
         })
     }
 
