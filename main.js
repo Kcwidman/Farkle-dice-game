@@ -1,9 +1,3 @@
-//THINGS TO FIX
-//1. Add graphic if you farkle
-//1.5 Add + score graphic
-//2. Spacebar to roll
-//3. Add winner check
-
 let main = function() 
 {
 
