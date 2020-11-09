@@ -39,7 +39,7 @@ class Game
         for(let i=0; i<this.playerCount;i++)
         {
             let text = this.players[i].name + ": " + this.players[i].totalScore
-            text+=" + ( " + this.players[i].prevTurnScore + ")"
+            text+="  ( " + this.players[i].prevTurnScore + " )"
             if(this.currentPlayer().name == this.players[i].name)
             {
                 text+=" *"

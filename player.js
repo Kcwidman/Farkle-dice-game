@@ -81,7 +81,7 @@ class player
         console.log("turn score is ",this.turnScore," at endTurn", this.farkle)
         if(!this.farkle) this.totalScore += this.turnScore
         this.turnCount++
-        if(this.farkle = true) this.prevTurnScore = "FARKLE"
+        if(this.farkle == true) this.prevTurnScore = "FARKLE"
         else this.prevTurnScore = this.turnScore
         this.turnScore = 0
         this.farkle = false
