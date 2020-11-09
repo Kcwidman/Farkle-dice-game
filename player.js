@@ -2,7 +2,7 @@ class player
 {
     constructor(name)
     {
-        this.totalScore = 9900
+        this.totalScore = 0
         this.turnScore = 0
         this.name = name
         this.activeDice = new Array(6)
